@@ -32,6 +32,8 @@
       .font18px {
         font-size: 19px !important;
       }
+
+      
     </style>
   </head>
   <body>
@@ -61,7 +63,6 @@
         </div>
       </div>
     </div>
-
    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js
 "></script>
@@ -80,12 +81,14 @@
         callingClass.onreadystatechange = () => {
           if (callingClass.readyState === 4) {
             let dataStored = JSON.parse(callingClass.responseText);
-            let { name: city } = dataStored;
+            let { name: city ,main:{temp:temprature}} = dataStored;
             let {
               weather: [{ main: weatherNow, description, icon }],
             } = dataStored;
-            console.log(dataStored);
+            console.log(temprature);
             let iconUrl =`https://openweathermap.org/img/wn/${icon}@2x.png`
+
+            const temperatureInCelsius = Math.round(temprature-273.15);
             newElement.setAttribute("class","justify-content-center d-flex mt-3")
             newElement.innerHTML = ` <div class="col-12 col-lg-3 bg-light rounded-3">
 
@@ -95,7 +98,8 @@
                 <img src="${iconUrl}" alt="" class ="img-fluid">
 
       <div class="card-title mb-0 ">
-        <h2 class="text-center mb-0">${weatherNow}</h2>
+        <h2 class="text-center mb-0">${weatherNow} <span class="font18px"><small>${temperatureInCelsius}<sup>&deg</sup>C</small></span>
+</h2>
         <h6 class="text-center mb-0 mt-1 text-muted">(${city})</h6>
 
       </div>
