@@ -18,6 +18,58 @@
     />
 
     <style>
+      /* Loader Starts Here */
+/* Loader */
+
+.loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #094D79;
+  transition: opacity 0.75s, visibility 0.75s;
+}
+
+.loader h1 {
+  font-size: 8vh;
+  color: whitesmoke;
+  font-family: "Raleway", sans-serif;
+  margin-bottom: 6vh;
+}
+
+.loader-hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.loader::after {
+  content: "";
+  height: 2.5rem;
+  width: 2.5rem;
+  border: 5px solid #094D79;
+  border-top-color: whitesmoke;
+  font-family: "Roboto Slab", serif;
+  border-radius: 50%;
+  animation: loading 1s ease infinite;
+}
+
+@keyframes loading {
+  from {
+    transform: rotate(0turn);
+  }
+
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+/*Loader Ends Here  */
+
       body {
         font-family: "Montserrat", sans-serif;
         background: #094d79;
@@ -64,6 +116,22 @@
       </div>
     </div>
    
+    <script>
+      window.addEventListener("load", () => {
+        const loader = document.querySelector(".loader");
+
+        loader.classList.add("loader-hidden");
+
+        loader.addEventListener("transitionend", () => {
+          //document.body.removeChild(".loader");
+        });
+      });
+    </script>
+    <!-- Loader -->
+    <div class="loader">
+      <h1>Weather API</h1>
+    </div>
+  </body>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js
 "></script>
 
